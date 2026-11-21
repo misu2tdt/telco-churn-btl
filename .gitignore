@@ -1,5 +1,15 @@
+# Python
 __pycache__/
-.ipynb_checkpoints/
+*.pyc
 .venv/
 venv/
-*.pyc
+.ipynb_checkpoints/
+
+# Mô hình/pipeline đã huấn luyện: phụ thuộc phiên bản thư viện, tạo lại bằng `python make_data.py`
+*.joblib
+
+# Hệ điều hành / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
