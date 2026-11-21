@@ -1,0 +1,43 @@
+{
+  "target": "Churn",
+  "random_state": 42,
+  "test_size": 0.2,
+  "drop_cols": [
+    "TotalCharges",
+    "gender",
+    "PhoneService"
+  ],
+  "train_rows": 5634,
+  "test_rows": 1409,
+  "n_features_after_encoding": 28,
+  "feature_names": [
+    "tenure",
+    "MonthlyCharges",
+    "n_services",
+    "SeniorCitizen",
+    "Partner_Yes",
+    "Dependents_Yes",
+    "MultipleLines_Yes",
+    "InternetService_DSL",
+    "InternetService_Fiber optic",
+    "InternetService_No",
+    "OnlineSecurity_Yes",
+    "OnlineBackup_Yes",
+    "DeviceProtection_Yes",
+    "TechSupport_Yes",
+    "StreamingTV_Yes",
+    "StreamingMovies_Yes",
+    "Contract_Month-to-month",
+    "Contract_One year",
+    "Contract_Two year",
+    "PaperlessBilling_Yes",
+    "PaymentMethod_Bank transfer (automatic)",
+    "PaymentMethod_Credit card (automatic)",
+    "PaymentMethod_Electronic check",
+    "PaymentMethod_Mailed check",
+    "tenure_group_0-12",
+    "tenure_group_13-24",
+    "tenure_group_25-48",
+    "tenure_group_49+"
+  ]
+}
