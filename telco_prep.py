@@ -49,6 +49,10 @@ CATEGORICAL_COLS = [
 # -> 28 đặc trưng. Mặc định của build_pipeline / with_model; truyền drop_cols=[] để giữ đủ 31.
 DROP_COLS = ["TotalCharges", "gender", "PhoneService"]
 
+REDUCED_INPUTS = ["Contract", "tenure", "MonthlyCharges", "InternetService", "PaymentMethod"]
+MODEL_COLUMNS = [c for c in NUMERIC_COLS + BINARY_PASSTHROUGH + CATEGORICAL_COLS if c not in DROP_COLS]
+FULL_INPUTS = [c for c in MODEL_COLUMNS if c not in ("n_services", "tenure_group")]
+
 _TENURE_BINS = [-1, 12, 24, 48, np.inf]
 _TENURE_LABELS = ["0-12", "13-24", "25-48", "49+"]
 
@@ -128,6 +132,36 @@ def add_features(df: pd.DataFrame) -> pd.DataFrame:
 def prepare_features(df: pd.DataFrame) -> pd.DataFrame:
     """clean_raw + add_features. Đây là hàm được gắn ở đầu pipeline."""
     return add_features(clean_raw(df))
+
+
+def modeling_features(df: pd.DataFrame, reduced: bool) -> pd.DataFrame:
+    """Project raw dashboard inputs to the same information for encoded and native models."""
+    inputs = df.loc[:, REDUCED_INPUTS if reduced else FULL_INPUTS].copy()
+    for c in ("tenure", "MonthlyCharges"):
+        values = pd.to_numeric(inputs[c], errors="raise")
+        if values.isna().any() or not np.isfinite(values).all() or (values < 0).any():
+            raise ValueError(f"{c} phải là số hữu hạn không âm.")
+        if c == "tenure" and (values % 1 != 0).any():
+            raise ValueError("tenure phải là số tháng nguyên.")
+        inputs[c] = values
+    if "SeniorCitizen" in inputs and not pd.to_numeric(inputs["SeniorCitizen"]).isin([0, 1]).all():
+        raise ValueError("SeniorCitizen phải là 0 hoặc 1.")
+    features = clean_raw(inputs) if reduced else prepare_features(inputs)
+    for c in inputs.columns.intersection(CATEGORICAL_COLS):
+        if features[c].eq("").any():
+            raise ValueError(f"{c} có giá trị trống.")
+    return features.loc[:, REDUCED_INPUTS if reduced else MODEL_COLUMNS]
+
+
+
+def predict_churn(bundle: dict, customers: pd.DataFrame) -> pd.DataFrame:
+    """Score dashboard rows using the threshold selected on out-of-fold predictions."""
+    inputs = customers.loc[:, bundle["input_columns"]]
+    if inputs.isna().any().any():
+        raise ValueError("Thiếu giá trị thuộc tính đầu vào.")
+    probability = bundle["pipeline"].predict_proba(inputs)[:, 1]
+    return pd.DataFrame({"probability": probability, "Churn": (probability >= bundle["threshold"]).astype(int)},
+                        index=customers.index)
 
 
 # ---------------------------------------------------------------- pipeline

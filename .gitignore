@@ -4,7 +4,7 @@ __pycache__/
 .venv/
 venv/
 .ipynb_checkpoints/
-
+__init__.py
 # Mô hình/pipeline đã huấn luyện: phụ thuộc phiên bản thư viện, tạo lại bằng `python make_data.py`
 *.joblib
 

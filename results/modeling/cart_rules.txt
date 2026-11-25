@@ -1,0 +1,151 @@
+|--- Contract_Month-to-month <= 0.50
+|   |--- MonthlyCharges <= 0.95
+|   |   |--- Contract_Two year <= 0.50
+|   |   |   |--- StreamingMovies_Yes <= 0.50
+|   |   |   |   |--- PaymentMethod_Electronic check <= 0.50
+|   |   |   |   |   |--- InternetService_DSL <= 0.50
+|   |   |   |   |   |   |--- weights: [303.00, 5.00] class: 0
+|   |   |   |   |   |--- InternetService_DSL >  0.50
+|   |   |   |   |   |   |--- weights: [190.00, 11.00] class: 0
+|   |   |   |   |--- PaymentMethod_Electronic check >  0.50
+|   |   |   |   |   |--- MonthlyCharges <= -0.18
+|   |   |   |   |   |   |--- weights: [43.00, 3.00] class: 0
+|   |   |   |   |   |--- MonthlyCharges >  -0.18
+|   |   |   |   |   |   |--- weights: [47.00, 9.00] class: 0
+|   |   |   |--- StreamingMovies_Yes >  0.50
+|   |   |   |   |--- PaymentMethod_Mailed check <= 0.50
+|   |   |   |   |   |--- n_services <= 1.32
+|   |   |   |   |   |   |--- weights: [125.00, 14.00] class: 0
+|   |   |   |   |   |--- n_services >  1.32
+|   |   |   |   |   |   |--- weights: [45.00, 9.00] class: 0
+|   |   |   |   |--- PaymentMethod_Mailed check >  0.50
+|   |   |   |   |   |--- weights: [35.00, 9.00] class: 0
+|   |   |--- Contract_Two year >  0.50
+|   |   |   |--- PaymentMethod_Electronic check <= 0.50
+|   |   |   |   |--- SeniorCitizen <= 0.50
+|   |   |   |   |   |--- OnlineBackup_Yes <= 0.50
+|   |   |   |   |   |   |--- weights: [616.00, 8.00] class: 0
+|   |   |   |   |   |--- OnlineBackup_Yes >  0.50
+|   |   |   |   |   |   |--- weights: [298.00, 0.00] class: 0
+|   |   |   |   |--- SeniorCitizen >  0.50
+|   |   |   |   |   |--- weights: [61.00, 3.00] class: 0
+|   |   |   |--- PaymentMethod_Electronic check >  0.50
+|   |   |   |   |--- weights: [66.00, 4.00] class: 0
+|   |--- MonthlyCharges >  0.95
+|   |   |--- Contract_One year <= 0.50
+|   |   |   |--- tenure <= 1.59
+|   |   |   |   |--- MonthlyCharges <= 1.36
+|   |   |   |   |   |--- MonthlyCharges <= 1.15
+|   |   |   |   |   |   |--- weights: [37.00, 4.00] class: 0
+|   |   |   |   |   |--- MonthlyCharges >  1.15
+|   |   |   |   |   |   |--- weights: [56.00, 2.00] class: 0
+|   |   |   |   |--- MonthlyCharges >  1.36
+|   |   |   |   |   |--- MonthlyCharges <= 1.50
+|   |   |   |   |   |   |--- weights: [27.00, 13.00] class: 0
+|   |   |   |   |   |--- MonthlyCharges >  1.50
+|   |   |   |   |   |   |--- weights: [50.00, 3.00] class: 0
+|   |   |   |--- tenure >  1.59
+|   |   |   |   |--- MonthlyCharges <= 1.43
+|   |   |   |   |   |--- weights: [38.00, 2.00] class: 0
+|   |   |   |   |--- MonthlyCharges >  1.43
+|   |   |   |   |   |--- weights: [71.00, 0.00] class: 0
+|   |   |--- Contract_One year >  0.50
+|   |   |   |--- Dependents_Yes <= 0.50
+|   |   |   |   |--- MonthlyCharges <= 1.27
+|   |   |   |   |   |--- n_services <= 0.78
+|   |   |   |   |   |   |--- weights: [52.00, 15.00] class: 0
+|   |   |   |   |   |--- n_services >  0.78
+|   |   |   |   |   |   |--- weights: [38.00, 3.00] class: 0
+|   |   |   |   |--- MonthlyCharges >  1.27
+|   |   |   |   |   |--- PaymentMethod_Electronic check <= 0.50
+|   |   |   |   |   |   |--- weights: [66.00, 22.00] class: 0
+|   |   |   |   |   |--- PaymentMethod_Electronic check >  0.50
+|   |   |   |   |   |   |--- weights: [26.00, 19.00] class: 0
+|   |   |   |--- Dependents_Yes >  0.50
+|   |   |   |   |--- MonthlyCharges <= 1.29
+|   |   |   |   |   |--- weights: [34.00, 9.00] class: 0
+|   |   |   |   |--- MonthlyCharges >  1.29
+|   |   |   |   |   |--- weights: [39.00, 2.00] class: 0
+|--- Contract_Month-to-month >  0.50
+|   |--- InternetService_Fiber optic <= 0.50
+|   |   |--- tenure <= -1.18
+|   |   |   |--- InternetService_No <= 0.50
+|   |   |   |   |--- MonthlyCharges <= -0.32
+|   |   |   |   |   |--- PaperlessBilling_Yes <= 0.50
+|   |   |   |   |   |   |--- weights: [61.00, 51.00] class: 0
+|   |   |   |   |   |--- PaperlessBilling_Yes >  0.50
+|   |   |   |   |   |   |--- weights: [49.00, 85.00] class: 1
+|   |   |   |   |--- MonthlyCharges >  -0.32
+|   |   |   |   |   |--- weights: [27.00, 13.00] class: 0
+|   |   |   |--- InternetService_No >  0.50
+|   |   |   |   |--- tenure <= -1.26
+|   |   |   |   |   |--- PaperlessBilling_Yes <= 0.50
+|   |   |   |   |   |   |--- weights: [57.00, 27.00] class: 0
+|   |   |   |   |   |--- PaperlessBilling_Yes >  0.50
+|   |   |   |   |   |   |--- weights: [22.00, 20.00] class: 0
+|   |   |   |   |--- tenure >  -1.26
+|   |   |   |   |   |--- weights: [50.00, 6.00] class: 0
+|   |   |--- tenure >  -1.18
+|   |   |   |--- PaymentMethod_Electronic check <= 0.50
+|   |   |   |   |--- MonthlyCharges <= -1.46
+|   |   |   |   |   |--- MonthlyCharges <= -1.48
+|   |   |   |   |   |   |--- weights: [114.00, 15.00] class: 0
+|   |   |   |   |   |--- MonthlyCharges >  -1.48
+|   |   |   |   |   |   |--- weights: [50.00, 2.00] class: 0
+|   |   |   |   |--- MonthlyCharges >  -1.46
+|   |   |   |   |   |--- tenure <= -0.94
+|   |   |   |   |   |   |--- weights: [94.00, 33.00] class: 0
+|   |   |   |   |   |--- tenure >  -0.94
+|   |   |   |   |   |   |--- weights: [280.00, 48.00] class: 0
+|   |   |   |--- PaymentMethod_Electronic check >  0.50
+|   |   |   |   |--- tenure <= -0.41
+|   |   |   |   |   |--- OnlineBackup_Yes <= 0.50
+|   |   |   |   |   |   |--- weights: [83.00, 60.00] class: 0
+|   |   |   |   |   |--- OnlineBackup_Yes >  0.50
+|   |   |   |   |   |   |--- weights: [36.00, 9.00] class: 0
+|   |   |   |   |--- tenure >  -0.41
+|   |   |   |   |   |--- tenure <= 0.24
+|   |   |   |   |   |   |--- weights: [51.00, 6.00] class: 0
+|   |   |   |   |   |--- tenure >  0.24
+|   |   |   |   |   |   |--- weights: [35.00, 11.00] class: 0
+|   |--- InternetService_Fiber optic >  0.50
+|   |   |--- tenure <= -0.77
+|   |   |   |--- tenure <= -1.26
+|   |   |   |   |--- MultipleLines_Yes <= 0.50
+|   |   |   |   |   |--- MonthlyCharges <= 0.17
+|   |   |   |   |   |   |--- weights: [3.00, 42.00] class: 1
+|   |   |   |   |   |--- MonthlyCharges >  0.17
+|   |   |   |   |   |   |--- weights: [22.00, 78.00] class: 1
+|   |   |   |   |--- MultipleLines_Yes >  0.50
+|   |   |   |   |   |--- weights: [3.00, 43.00] class: 1
+|   |   |   |--- tenure >  -1.26
+|   |   |   |   |--- MonthlyCharges <= 0.44
+|   |   |   |   |   |--- MultipleLines_Yes <= 0.50
+|   |   |   |   |   |   |--- weights: [61.00, 53.00] class: 0
+|   |   |   |   |   |--- MultipleLines_Yes >  0.50
+|   |   |   |   |   |   |--- weights: [20.00, 35.00] class: 1
+|   |   |   |   |--- MonthlyCharges >  0.44
+|   |   |   |   |   |--- MultipleLines_Yes <= 0.50
+|   |   |   |   |   |   |--- weights: [69.00, 127.00] class: 1
+|   |   |   |   |   |--- MultipleLines_Yes >  0.50
+|   |   |   |   |   |   |--- weights: [43.00, 163.00] class: 1
+|   |   |--- tenure >  -0.77
+|   |   |   |--- PaymentMethod_Electronic check <= 0.50
+|   |   |   |   |--- tenure <= 0.77
+|   |   |   |   |   |--- StreamingMovies_Yes <= 0.50
+|   |   |   |   |   |   |--- weights: [136.00, 57.00] class: 0
+|   |   |   |   |   |--- StreamingMovies_Yes >  0.50
+|   |   |   |   |   |   |--- weights: [79.00, 70.00] class: 0
+|   |   |   |   |--- tenure >  0.77
+|   |   |   |   |   |--- MonthlyCharges <= 1.01
+|   |   |   |   |   |   |--- weights: [36.00, 6.00] class: 0
+|   |   |   |   |   |--- MonthlyCharges >  1.01
+|   |   |   |   |   |   |--- weights: [31.00, 9.00] class: 0
+|   |   |   |--- PaymentMethod_Electronic check >  0.50
+|   |   |   |   |--- tenure <= 0.94
+|   |   |   |   |   |--- MultipleLines_Yes <= 0.50
+|   |   |   |   |   |   |--- weights: [77.00, 53.00] class: 0
+|   |   |   |   |   |--- MultipleLines_Yes >  0.50
+|   |   |   |   |   |   |--- weights: [139.00, 184.00] class: 1
+|   |   |   |   |--- tenure >  0.94
+|   |   |   |   |   |--- weights: [48.00, 20.00] class: 0
